@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { useEffect, useState } from "react";
+import { useEffect, useState, type MouseEvent } from "react";
 import { Globe, Menu, X } from "lucide-react";
 import { useLang } from "@/lib/i18n";
 import marinaLogo from "@/assets/marina-logo-oficial.jpg";
@@ -27,6 +27,31 @@ export function Header() {
     t.nav.contact,
   ];
 
+  const scrollToAnchor = (event: MouseEvent<HTMLAnchorElement>, id: string) => {
+    event.preventDefault();
+
+    const section = document.getElementById(id);
+    if (!section) return;
+
+    const headerBar = document.querySelector<HTMLElement>("header > div");
+    const content =
+      id === "top"
+        ? section
+        : section.querySelector<HTMLElement>(":scope > div") ?? section;
+    const headerHeight = headerBar?.getBoundingClientRect().height ?? 88;
+    const top =
+      window.scrollY + content.getBoundingClientRect().top - headerHeight - 24;
+
+    // The URL hash is intentionally not updated because the router would
+    // perform a second, conflicting scroll to the section wrapper.
+    const root = document.documentElement;
+    const previousScrollBehavior = root.style.scrollBehavior;
+    root.style.scrollBehavior = "auto";
+    window.scrollTo({ top: Math.max(0, top), behavior: "auto" });
+    root.style.scrollBehavior = previousScrollBehavior;
+    setOpen(false);
+  };
+
   return (
     <header
       className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${
@@ -36,7 +61,11 @@ export function Header() {
       }`}
     >
       <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 sm:px-6">
-        <a href="#top" className="flex items-center gap-3">
+        <a
+          href="#top"
+          onClick={(event) => scrollToAnchor(event, "top")}
+          className="flex items-center gap-3"
+        >
           <span className="overflow-hidden rounded-lg bg-on-photo p-1 shadow-sm">
             <img
               src={marinaLogo}
@@ -61,6 +90,7 @@ export function Header() {
             <a
               key={id}
               href={`#${id}`}
+              onClick={(event) => scrollToAnchor(event, id)}
               className={`text-xs font-semibold tracking-normal uppercase transition-colors hover:text-primary ${
                 scrolled ? "text-foreground/80" : "text-on-photo/90"
               }`}
@@ -98,7 +128,7 @@ export function Header() {
               <a
                 key={id}
                 href={`#${id}`}
-                onClick={() => setOpen(false)}
+                onClick={(event) => scrollToAnchor(event, id)}
                 className="rounded-md px-3 py-2.5 text-sm font-semibold tracking-normal text-foreground uppercase hover:bg-secondary"
               >
                 {labels[i]}
