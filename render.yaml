@@ -1,0 +1,17 @@
+services:
+  - type: web
+    name: marina-recanto-do-lago
+    runtime: node
+    plan: free
+    region: oregon
+    buildCommand: npm ci && npm run build
+    startCommand: npm start
+    healthCheckPath: /
+    autoDeployTrigger: commit
+    domains:
+      - marinarecantodolago.com.br
+    envVars:
+      - key: NITRO_PRESET
+        value: node-server
+      - key: NODE_VERSION
+        value: 22
