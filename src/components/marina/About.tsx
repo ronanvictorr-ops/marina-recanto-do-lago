@@ -7,12 +7,12 @@ export function About() {
   const { t } = useLang();
 
   return (
-    <section id="about" className="py-20 sm:py-28">
-      <div className="mx-auto grid max-w-7xl items-center gap-12 px-4 sm:px-6 lg:grid-cols-2 lg:gap-16">
+    <section id="about" className="pt-6 pb-16 sm:py-20 lg:py-28">
+      <div className="mx-auto grid max-w-[1400px] items-center gap-10 px-4 sm:px-6 lg:grid-cols-[1.08fr_0.92fr] lg:gap-16">
         <Reveal>
-          <div className="rounded-xl border-2 border-primary p-3">
+          <div className="overflow-hidden rounded-xl border-2 border-primary bg-primary">
             <video
-              className="block aspect-[4/3] w-full rounded-lg object-cover shadow-xl"
+              className="block aspect-[4/3] w-full object-cover object-center shadow-xl"
               poster={boatStorage}
               autoPlay
               muted
