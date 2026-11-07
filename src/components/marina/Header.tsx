@@ -60,7 +60,11 @@ export function Header() {
           : "bg-transparent"
       }`}
     >
-      <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 sm:px-6">
+      <div
+        className={`mx-auto flex max-w-7xl items-center justify-between px-4 transition-[padding] duration-300 sm:px-6 ${
+          scrolled || open ? "py-1.5" : "py-3"
+        }`}
+      >
         <a
           href="#top"
           onClick={(event) => scrollToAnchor(event, "top")}
@@ -70,7 +74,9 @@ export function Header() {
             <img
               src={marinaLogo}
               alt="Marina Recanto do Lago"
-              className="h-14 w-14 object-contain"
+              className={`object-contain transition-[width,height] duration-300 ${
+                scrolled || open ? "h-12 w-12" : "h-14 w-14"
+              }`}
             />
           </span>
           <span
