@@ -6,7 +6,7 @@ export function Hero() {
   const { t } = useLang();
 
   return (
-    <section id="top" className="relative flex min-h-[660px] h-[84svh] max-h-[850px] items-center">
+    <section id="top" className="relative flex h-[100svh] min-h-[660px] items-center sm:h-[84svh] sm:max-h-[850px]">
       <img
         src={heroImg}
         alt="Vista real do lago na Marina Recanto do Lago"
