@@ -8,8 +8,6 @@ services:
     startCommand: npm start
     healthCheckPath: /
     autoDeployTrigger: commit
-    domains:
-      - marinarecantodolago.com.br
     envVars:
       - key: NITRO_PRESET
         value: node-server
@@ -22,3 +20,5 @@ services:
     buildCommand: npm ci && npm run build
     staticPublishPath: ./.output/public
     autoDeployTrigger: commit
+    domains:
+      - marinarecantodolago.com.br
