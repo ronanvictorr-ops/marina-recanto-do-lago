@@ -15,3 +15,10 @@ services:
         value: node-server
       - key: NODE_VERSION
         value: 22
+
+  - type: web
+    name: marina-recanto-do-lago-static
+    runtime: static
+    buildCommand: npm ci && npm run build
+    staticPublishPath: ./.output/public
+    autoDeployTrigger: commit
